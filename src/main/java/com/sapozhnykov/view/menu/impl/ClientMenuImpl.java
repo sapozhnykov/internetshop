@@ -2,8 +2,6 @@ package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.view.menu.MenuView;
 
-import java.io.IOException;
-
 public class ClientMenuImpl extends MenuImpl {
     private final MenuView catalogMenu = new CatalogMenuImpl();
 
@@ -18,7 +16,7 @@ public class ClientMenuImpl extends MenuImpl {
     }
 
     @Override
-    protected void makeChoice() throws IOException {
+    protected void makeChoice() {
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {

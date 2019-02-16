@@ -2,15 +2,14 @@ package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.view.menu.MenuView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public abstract class MenuImpl implements MenuView {
-    protected final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    protected final Scanner scanner = new Scanner(System.in);
     boolean isRunningMenu = true;
 
-    public void start() throws IOException {
+    public void start(){
+        isRunningMenu = true;
         makeChoice();
     }
 
@@ -24,18 +23,18 @@ public abstract class MenuImpl implements MenuView {
 
     protected abstract void showMenu();
 
-    protected abstract void makeChoice() throws IOException;
+    protected abstract void makeChoice();
 
     protected void showErrorMessage() {
         System.out.println("ERROR, wrong menu item. Please, try again...");
     }
 
-    protected String inputParameter(String inputName) throws IOException {
+    protected String inputParameter(String inputName) {
         String tempValue = "";
 
         while(tempValue.equals("")) {
             System.out.println("Input " + inputName + ":");
-            tempValue = br.readLine();
+            tempValue = scanner.nextLine();
         }
 
         return tempValue;

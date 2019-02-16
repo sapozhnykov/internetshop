@@ -6,7 +6,6 @@ import com.sapozhnykov.domain.Order;
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.order.OrderService;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class OrderServiceImpl implements OrderService {
@@ -14,11 +13,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean add(ArrayList<Product> products) {
-        BigDecimal finalCost = new BigDecimal(0);
-        for(Product product: products) {
-            finalCost = finalCost.add(product.getPrice());
-        }
-        Order order = new Order(finalCost, products);
+        /* We don't have a Session to get client ID.
+        *  So for current program version we have only one client
+        *  who can bye something.
+        * */
+        long clientId = 1;
+
+        Order order = new Order(clientId, products);
         return orderDao.add(order);
     }
+
+    @Override
+    public ArrayList<Order> getAll() { return orderDao.getAll(); }
 }

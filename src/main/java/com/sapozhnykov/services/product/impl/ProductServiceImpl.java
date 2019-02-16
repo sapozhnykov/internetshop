@@ -5,7 +5,6 @@ import com.sapozhnykov.dao.product.impl.ProductDaoImpl;
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.product.ProductService;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class ProductServiceImpl implements ProductService {
@@ -13,9 +12,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean addProduct(String name, String price) {
-        BigDecimal tempPrice;
+        double tempPrice;
         try {
-            tempPrice = new BigDecimal(price);
+            tempPrice = Double.parseDouble(price);
         } catch (NumberFormatException e) {
             return false;
         }
@@ -26,14 +25,31 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean deleteById(String id) {
-        return productDao.deleteById(id);
+        long tempId;
+
+        try {
+            tempId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return productDao.deleteById(tempId);
     }
 
     @Override
-    public ArrayList<Product> getAllProduct() { return productDao.getAll(); }
+    public ArrayList<Product> getAllProduct() {
+        return productDao.getAll();
+    }
 
     @Override
     public Product getById(String id) {
-        return productDao.getById(id);
+        long tempId;
+
+        try {
+            tempId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+
+        return productDao.getById(tempId);
     }
 }

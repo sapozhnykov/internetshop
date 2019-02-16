@@ -1,47 +1,39 @@
 package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.domain.Product;
-import com.sapozhnykov.services.cart.CartService;
-import com.sapozhnykov.services.cart.impl.CartServiceImpl;
 import com.sapozhnykov.services.order.OrderService;
 import com.sapozhnykov.services.order.impl.OrderServiceImpl;
 import com.sapozhnykov.services.product.ProductService;
 import com.sapozhnykov.services.product.impl.ProductServiceImpl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class CatalogMenuImpl extends MenuImpl{
-    private final CartService cartService = new CartServiceImpl();
     private final ProductService productService = new ProductServiceImpl();
     private final OrderService orderService = new OrderServiceImpl();
+    private ArrayList<Product> selectedProducts = new ArrayList<>();
 
     @Override
     protected void showMenu() {
         System.out.println("====== CATALOG MENU ======");
         showAllProducts();
         System.out.println("______    Options   _______");
-        System.out.println("1. Add product to the cart");
-        System.out.println("2. Show the cart");
-        System.out.println("3. Checkout!");
+        System.out.println("1. Add product to the order");
+        System.out.println("2. List orders");
         System.out.println("r. Return");
         System.out.println("e. Exit");
     }
 
     @Override
-    protected void makeChoice() throws IOException {
+    protected void makeChoice() {
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
                 case "1":
-                    addToCart();
+                    addToOrder();
                     break;
                 case "2":
-                    showTheCart();
-                    break;
-                case "3":
-//                    System.out.println("CHECKOUT");
-                    doCkeckout();
+                    listOrders();
                     break;
                 case "r":
                     super.returnBack();
@@ -59,42 +51,37 @@ public class CatalogMenuImpl extends MenuImpl{
         productService.getAllProduct().forEach(System.out::println);
     }
 
-    private void doCkeckout() {
-        boolean result;
-
-        ArrayList<Product> cartProducts = cartService.getAll();
-        result = orderService.add(cartProducts);
-
-        if(result) {
-            System.out.println("Thank you for your checkout!");
-        } else {
-            System.out.println("Error. checkout can't be done!");
-        }
-        System.out.println();
-    }
-
-    private void showTheCart() {
-        System.out.println("===== Your card =====");
-        cartService.getAll().forEach(System.out::println);
-        System.out.println();
-    }
-
-    private void addToCart() throws IOException {
+    private void addToOrder() {
         String tempId = "";
         boolean result = false;
         Product product;
+        String choice;
 
-        tempId = super.inputParameter("product ID");
-        product = productService.getById(tempId);
-        if(product != null){
-            result = cartService.addToCart(product);
+        do{
+            tempId = super.inputParameter("product ID");
+            product = productService.getById(tempId);
+            if(product != null) {
+                selectedProducts.add(product);
+            } else {
+                System.out.println("Product not found");
+            }
+            System.out.println("Would you like to add one more? (y/n)");
+            choice = super.inputParameter("Make a choice");
+        } while (choice.equals("y"));
+
+        if(!selectedProducts.isEmpty()){
+            result = orderService.add(selectedProducts);
         }
 
         if(result) {
-            System.out.println("product added to cart!");
+            System.out.println("Products added to the order!");
         } else {
-            System.out.println("Error. product don't added to cart!");
+            System.out.println("Error. Products didn't add to the order!");
         }
         System.out.println();
+    }
+
+    private void listOrders() {
+        orderService.getAll().forEach(System.out::println);
     }
 }

@@ -17,7 +17,7 @@ public interface ClientDao {
      * @param id - Client ID
      * @return true if delete is successful
      */
-    boolean deleteById(String id);
+    boolean deleteById(long id);
 
     /**
      * Get all Clients from the storage

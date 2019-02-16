@@ -21,18 +21,11 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public boolean deleteById(String id) {
-        long tempId;
+    public boolean deleteById(long id) {
         boolean result;
         Client tempClient;
 
-        try {
-            tempId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-
-        tempClient = findClientById(tempId);
+        tempClient = findClientById(id);
         result = deleteClient(tempClient);
         return result;
     }

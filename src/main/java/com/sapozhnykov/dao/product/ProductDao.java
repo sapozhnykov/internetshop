@@ -17,7 +17,7 @@ public interface ProductDao {
      * @param id - Product ID
      * @return true if delete is successful
      */
-    boolean deleteById(String id);
+    boolean deleteById(long id);
 
     /**
      * Get all Products from the storage
@@ -30,5 +30,5 @@ public interface ProductDao {
      * @param id - Product ID
      * @return Product
      */
-    Product getById(String id);
+    Product getById(long id);
 }

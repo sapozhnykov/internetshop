@@ -8,8 +8,14 @@ import java.util.ArrayList;
 public interface OrderService {
     /**
      * Add new Order
-     * @param products - list of Products
+     * @param products - List of selected products
      * @return true if add is successful
      */
     boolean add(ArrayList<Product> products);
+
+    /**
+     * Return all Orders
+     * @return all Orders
+     */
+    ArrayList<Order> getAll();
 }

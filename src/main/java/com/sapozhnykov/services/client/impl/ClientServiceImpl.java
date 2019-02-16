@@ -18,7 +18,17 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean deleteClientById(String id) { return clientDao.deleteById(id); }
+    public boolean deleteClientById(String id) {
+        long tempId;
+
+        try {
+            tempId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return clientDao.deleteById(tempId);
+    }
 
     @Override
     public ArrayList<Client> getAllClient() {

@@ -3,8 +3,6 @@ package com.sapozhnykov.view.menu.impl;
 import com.sapozhnykov.services.client.ClientService;
 import com.sapozhnykov.services.client.impl.ClientServiceImpl;
 
-import java.io.IOException;
-
 public class ClientListMenuImpl extends MenuImpl{
     private final ClientService clientService = new ClientServiceImpl();
 
@@ -20,7 +18,7 @@ public class ClientListMenuImpl extends MenuImpl{
     }
 
     @Override
-    protected void makeChoice() throws IOException {
+    protected void makeChoice() {
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
@@ -46,7 +44,7 @@ public class ClientListMenuImpl extends MenuImpl{
         clientService.getAllClient().forEach(System.out::println);
     }
 
-    private void addClient() throws IOException {
+    private void addClient() {
         String name = "";
         String surname = "";
         String phone = "";
@@ -67,7 +65,7 @@ public class ClientListMenuImpl extends MenuImpl{
         System.out.println();
     }
 
-    private void deleteClient() throws IOException {
+    private void deleteClient() {
         String tempId = "";
         boolean result;
 

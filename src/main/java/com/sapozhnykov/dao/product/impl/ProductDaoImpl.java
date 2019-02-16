@@ -3,28 +3,25 @@ package com.sapozhnykov.dao.product.impl;
 import com.sapozhnykov.dao.product.ProductDao;
 import com.sapozhnykov.domain.Product;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class ProductDaoImpl implements ProductDao {
     private ArrayList<Product> products = new ArrayList<>();
 
     public ProductDaoImpl() {
-        products.add(new Product("IPhone 5" , new BigDecimal(320)));
-        products.add(new Product("IPhone 6" , new BigDecimal(340)));
-        products.add(new Product("IPhone 8 plus" , new BigDecimal(430)));
-        products.add(new Product("IPhone 10" , new BigDecimal(840)));
+        products.add(new Product("IPhone 5" , 320));
+        products.add(new Product("IPhone 6" , 340));
+        products.add(new Product("IPhone 8 plus" , 430));
+        products.add(new Product("IPhone 10" , 840));
     }
 
     @Override
     public boolean add(Product product) {
-        boolean result = products.add(product);
-        System.out.println("Saving... Please, wait...");
-        return result;
+        return products.add(product);
     }
 
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(long id) {
         Product tempProduct;
 
         tempProduct = getById(id);
@@ -37,17 +34,9 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Product getById(String id) {
-        long tempId;
-
-        try {
-            tempId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            return null;
-        }
-
+    public Product getById(long id) {
         for(Product product: products) {
-            if(product.getId() == tempId) {
+            if(product.getId() == id) {
                 return product;
             }
         }

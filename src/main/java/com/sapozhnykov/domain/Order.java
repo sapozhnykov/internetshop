@@ -1,36 +1,25 @@
 package com.sapozhnykov.domain;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Order {
-    private static long id = 1;
-    private long idClient;
-    private BigDecimal finalCost;
+    private long id;
+    private long clientId;
     private ArrayList<Product> products;
 
-    public Order(BigDecimal finalCost, ArrayList<Product> products) {
-        id = id++;
-        this.finalCost = finalCost;
+    public Order(long clientId, ArrayList<Product> products) {
+        this.clientId = clientId;
         this.products = products;
     }
 
-    public long getIdClient() {
-        return idClient;
+    public long getId() {
+        return id;
     }
 
-    public void setIdClient(long idClient) {
-        this.idClient = idClient;
-    }
+    public void setId(long id) { this.id = id; }
 
-    public BigDecimal getFinalCost() {
-        return finalCost;
-    }
-
-    public void setFinalCost(BigDecimal finalCost) {
-        this.finalCost = finalCost;
+    public long getClientId() {
+        return clientId;
     }
 
     public ArrayList<Product> getProducts() {
@@ -44,8 +33,8 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "idCliet=" + idClient +
-                ", finalCost=" + finalCost +
+                "id=" + id +
+                ", clientId=" + clientId +
                 ", products=" + products +
                 '}';
     }

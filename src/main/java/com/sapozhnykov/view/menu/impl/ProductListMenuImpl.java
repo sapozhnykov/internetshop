@@ -3,8 +3,6 @@ package com.sapozhnykov.view.menu.impl;
 import com.sapozhnykov.services.product.ProductService;
 import com.sapozhnykov.services.product.impl.ProductServiceImpl;
 
-import java.io.IOException;
-
 public class ProductListMenuImpl extends MenuImpl {
     private final ProductService productService = new ProductServiceImpl();
 
@@ -20,7 +18,7 @@ public class ProductListMenuImpl extends MenuImpl {
     }
 
     @Override
-    protected void makeChoice() throws IOException {
+    protected void makeChoice(){
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
@@ -46,7 +44,7 @@ public class ProductListMenuImpl extends MenuImpl {
         productService.getAllProduct().forEach(System.out::println);
     }
 
-    private void addProduct() throws IOException {
+    private void addProduct(){
         String name = "";
         String price = "";
 
@@ -64,7 +62,7 @@ public class ProductListMenuImpl extends MenuImpl {
         System.out.println();
     }
 
-    private void deleteProduct() throws IOException {
+    private void deleteProduct(){
         String tempId = "";
         boolean result;
 
