@@ -17,10 +17,6 @@ public abstract class MenuImpl implements MenuView {
         isRunningMenu = false;
     }
 
-    protected void exit() {
-        System.exit(0);
-    }
-
     protected abstract void showMenu();
 
     protected abstract void makeChoice();

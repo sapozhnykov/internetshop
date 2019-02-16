@@ -14,7 +14,6 @@ public class ClientListMenuImpl extends MenuImpl{
         System.out.println("1. Add new client");
         System.out.println("2. Delete client");
         System.out.println("r. Return");
-        System.out.println("e. Exit");
     }
 
     @Override
@@ -30,9 +29,6 @@ public class ClientListMenuImpl extends MenuImpl{
                     break;
                 case "r":
                     super.returnBack();
-                    break;
-                case "e":
-                    super.exit();
                     break;
                 default:
                     super.showErrorMessage();

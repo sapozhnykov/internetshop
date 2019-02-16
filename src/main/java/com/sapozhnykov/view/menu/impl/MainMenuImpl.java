@@ -27,7 +27,7 @@ public class MainMenuImpl extends MenuImpl {
                     adminMenu.start();
                     break;
                 case "e":
-                    super.exit();
+                    super.returnBack();;
                     break;
                 default:
                     super.showErrorMessage();

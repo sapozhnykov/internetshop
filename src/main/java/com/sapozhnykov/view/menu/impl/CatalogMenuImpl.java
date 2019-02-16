@@ -21,7 +21,6 @@ public class CatalogMenuImpl extends MenuImpl{
         System.out.println("1. Add product to the order");
         System.out.println("2. List orders");
         System.out.println("r. Return");
-        System.out.println("e. Exit");
     }
 
     @Override
@@ -37,9 +36,6 @@ public class CatalogMenuImpl extends MenuImpl{
                     break;
                 case "r":
                     super.returnBack();
-                    break;
-                case "e":
-                    super.exit();
                     break;
                 default:
                     super.showErrorMessage();

@@ -13,7 +13,6 @@ public class AdminMenuImpl extends MenuImpl {
         System.out.println("1. Show client list");
         System.out.println("2. Show product list");
         System.out.println("r. Return");
-        System.out.println("e. Exit");
     }
 
     @Override
@@ -29,9 +28,6 @@ public class AdminMenuImpl extends MenuImpl {
                     break;
                 case "r":
                     super.returnBack();
-                    break;
-                case "e":
-                    super.exit();
                     break;
                 default:
                     super.showErrorMessage();

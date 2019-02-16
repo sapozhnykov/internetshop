@@ -12,7 +12,6 @@ public class ClientMenuImpl extends MenuImpl {
         System.out.println("1. Show catalog");
         System.out.println("2. Account settings");
         System.out.println("r. Return");
-        System.out.println("e. Exit");
     }
 
     @Override
@@ -28,9 +27,6 @@ public class ClientMenuImpl extends MenuImpl {
                     break;
                 case "r":
                     super.returnBack();
-                    break;
-                case "e":
-                    super.exit();
                     break;
                 default:
                     super.showErrorMessage();
