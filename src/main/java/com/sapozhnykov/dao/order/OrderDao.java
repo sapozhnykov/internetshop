@@ -8,9 +8,10 @@ import java.util.List;
 
 public interface OrderDao {
     /**
-     * Add Order to the storage
-     * @param order - Order
-     * @return true if add is successful
+     * Add order to the storage
+     * @param clientId - ID of client
+     * @param products - products
+     * @return
      */
     boolean add(long clientId, ArrayList<Product> products);
 

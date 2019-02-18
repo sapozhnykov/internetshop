@@ -6,6 +6,13 @@ import java.util.List;
 
 public interface AuthClientDao {
 
+    /**
+     * Add registered user
+     * @param userId - ID of user
+     * @param phone - phone/login of user
+     * @param password - password of user
+     * @return true if add is successful
+     */
     boolean add(long userId, String phone, String password);
 
     /**
