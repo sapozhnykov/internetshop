@@ -7,22 +7,17 @@ import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.order.OrderService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao = new OrderDaoImpl();
 
     @Override
-    public boolean add(ArrayList<Product> products) {
-        /* We don't have a Session to get client ID.
-        *  So for current program version we have only one client
-        *  who can bye something.
-        * */
-        long clientId = 1;
-
-        Order order = new Order(clientId, products);
-        return orderDao.add(order);
+    public boolean add(long clientId, ArrayList<Product> products) {
+//        Order order = new Order(clientId, products);
+        return orderDao.add(clientId, products);
     }
 
     @Override
-    public ArrayList<Order> getAll() { return orderDao.getAll(); }
+    public List<Order> getAll() { return orderDao.getAll(); }
 }

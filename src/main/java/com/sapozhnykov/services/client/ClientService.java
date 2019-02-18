@@ -3,6 +3,7 @@ package com.sapozhnykov.services.client;
 import com.sapozhnykov.domain.Client;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ClientService {
     /**
@@ -13,7 +14,7 @@ public interface ClientService {
      * @param email - email of Client
      * @return true if add is successful
      */
-    boolean createClient(String name, String surname, String phone, String email);
+    Client createClient(String name, String surname, String phone, String email);
 
     /**
      * Delete Client by ID
@@ -26,6 +27,6 @@ public interface ClientService {
      * Return all Clients
      * @return all Clients
      */
-    ArrayList<Client> getAllClient();
+    List<Client> getAllClient();
 
 }

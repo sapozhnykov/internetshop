@@ -1,13 +1,15 @@
 package com.sapozhnykov.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
     private long id;
     private long clientId;
-    private ArrayList<Product> products;
+    private List<Product> products;
 
-    public Order(long clientId, ArrayList<Product> products) {
+    public Order(long id, long clientId, ArrayList<Product> products) {
+        this.id = id;
         this.clientId = clientId;
         this.products = products;
     }
@@ -22,7 +24,7 @@ public class Order {
         return clientId;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 

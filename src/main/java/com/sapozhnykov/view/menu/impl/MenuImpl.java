@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public abstract class MenuImpl implements MenuView {
     protected final Scanner scanner = new Scanner(System.in);
-    boolean isRunningMenu = true;
+    protected boolean isRunningMenu = true;
 
-    public void start(){
+    public boolean start(){
         isRunningMenu = true;
-        makeChoice();
+        return makeChoice();
     }
 
     protected void returnBack() {
@@ -19,7 +19,7 @@ public abstract class MenuImpl implements MenuView {
 
     protected abstract void showMenu();
 
-    protected abstract void makeChoice();
+    protected abstract boolean makeChoice();
 
     protected void showErrorMessage() {
         System.out.println("ERROR, wrong menu item. Please, try again...");

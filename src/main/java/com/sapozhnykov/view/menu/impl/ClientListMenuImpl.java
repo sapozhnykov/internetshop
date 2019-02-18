@@ -1,5 +1,6 @@
 package com.sapozhnykov.view.menu.impl;
 
+import com.sapozhnykov.domain.Client;
 import com.sapozhnykov.services.client.ClientService;
 import com.sapozhnykov.services.client.impl.ClientServiceImpl;
 
@@ -14,10 +15,12 @@ public class ClientListMenuImpl extends MenuImpl{
         System.out.println("1. Add new client");
         System.out.println("2. Delete client");
         System.out.println("r. Return");
+        System.out.println("e. Exit");
     }
 
     @Override
-    protected void makeChoice() {
+    protected boolean makeChoice() {
+        boolean isWorkContinue = true;
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
@@ -30,10 +33,18 @@ public class ClientListMenuImpl extends MenuImpl{
                 case "r":
                     super.returnBack();
                     break;
+                case "e":
+                    isWorkContinue = false;
+                    super.returnBack();
+                    break;
                 default:
                     super.showErrorMessage();
             }
+            if(!isWorkContinue) {
+                super.returnBack();
+            }
         }
+        return isWorkContinue;
     }
 
     private void showAllClients() {
@@ -45,15 +56,14 @@ public class ClientListMenuImpl extends MenuImpl{
         String surname = "";
         String phone = "";
         String email = "";
-        boolean result;
 
         name = super.inputParameter("name");
         surname = super.inputParameter("surname");
         phone = super.inputParameter("phone");
         email = super.inputParameter("email");
 
-        result = clientService.createClient(name, surname, phone, email);
-        if(result) {
+        Client client = clientService.createClient(name, surname, phone, email);
+        if(client != null) {
             System.out.println("client saved!");
         } else {
             System.out.println("Error. client don't saved!");

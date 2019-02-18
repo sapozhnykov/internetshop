@@ -12,15 +12,17 @@ public class ClientMenuImpl extends MenuImpl {
         System.out.println("1. Show catalog");
         System.out.println("2. Account settings");
         System.out.println("r. Return");
+        System.out.println("e. Exit");
     }
 
     @Override
-    protected void makeChoice() {
+    protected boolean makeChoice() {
+        boolean isWorkContinue = true;
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
                 case "1":
-                    catalogMenu.start();
+                    isWorkContinue = catalogMenu.start();
                     break;
                 case "2":
                     System.out.println("ACCOUNT SETTINGS");
@@ -28,9 +30,17 @@ public class ClientMenuImpl extends MenuImpl {
                 case "r":
                     super.returnBack();
                     break;
+                case "e":
+                    isWorkContinue = false;
+                    super.returnBack();
+                    break;
                 default:
                     super.showErrorMessage();
             }
+            if(!isWorkContinue) {
+                super.returnBack();
+            }
         }
+        return isWorkContinue;
     }
 }

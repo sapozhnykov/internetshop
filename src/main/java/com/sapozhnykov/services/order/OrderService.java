@@ -4,6 +4,7 @@ import com.sapozhnykov.domain.Order;
 import com.sapozhnykov.domain.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface OrderService {
     /**
@@ -11,11 +12,11 @@ public interface OrderService {
      * @param products - List of selected products
      * @return true if add is successful
      */
-    boolean add(ArrayList<Product> products);
+    boolean add(long clientId, ArrayList<Product> products);
 
     /**
      * Return all Orders
      * @return all Orders
      */
-    ArrayList<Order> getAll();
+    List<Order> getAll();
 }

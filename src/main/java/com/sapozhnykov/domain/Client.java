@@ -1,16 +1,14 @@
 package com.sapozhnykov.domain;
 
 public class Client {
-    private static long tempID = 1;
-
     private long id;
     private String name;
     private String surname;
-    private String  email;
+    private String email;
     private String phone;
 
-    public Client(String name, String surname, String phone, String email) {
-        this.id = tempID++;
+    public Client(long id, String name, String surname, String phone, String email) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -19,10 +17,6 @@ public class Client {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -57,9 +51,10 @@ public class Client {
         this.phone = phone;
     }
 
+
     @Override
     public String toString() {
-        return "client{" +
+        return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

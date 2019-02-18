@@ -4,34 +4,41 @@ import com.sapozhnykov.view.menu.MenuView;
 
 public class MainMenuImpl extends MenuImpl {
     private final MenuView adminMenu = new AdminMenuImpl();
-    private final MenuView clientMenu = new ClientMenuImpl();
+    private final MenuView authClientMenu = new AuthClientMenuImpl();
+
 
     @Override
     protected void showMenu() {
         System.out.println("====== MAIN MENU ======");
         System.out.println("______  Options  ______");
-        System.out.println("1. Sing in as client");
-        System.out.println("2. Sing in as Admin");
+        System.out.println("1. I'm a Client");
+        System.out.println("2. I'm the Admin");
         System.out.println("e. Exit");
     }
 
     @Override
-    protected void makeChoice() {
+    protected boolean makeChoice() {
+        boolean isWorkContinue = true;
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
                 case "1":
-                    clientMenu.start();
+                    isWorkContinue = authClientMenu.start();
                     break;
                 case "2":
-                    adminMenu.start();
+                    isWorkContinue = adminMenu.start();
                     break;
                 case "e":
-                    super.returnBack();;
+                    isWorkContinue = false;
+                    super.returnBack();
                     break;
                 default:
                     super.showErrorMessage();
             }
+            if(!isWorkContinue) {
+                super.returnBack();
+            }
         }
+        return isWorkContinue;
     }
 }

@@ -6,15 +6,14 @@ import com.sapozhnykov.domain.Client;
 import com.sapozhnykov.services.client.ClientService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
     private ClientDao clientDao = new ClientDaoImpl();
 
     @Override
-    public boolean createClient(String name, String surname, String phone, String email) {
-        Client client = new Client(name, surname, phone, email);
-        boolean result = clientDao.add(client);
-        return result;
+    public Client createClient(String name, String surname, String phone, String email) {
+        return clientDao.add(name, surname, phone, email);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ArrayList<Client> getAllClient() {
+    public List<Client> getAllClient() {
         return clientDao.getAll();
     }
 }

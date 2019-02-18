@@ -4,9 +4,10 @@ import com.sapozhnykov.dao.product.ProductDao;
 import com.sapozhnykov.domain.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
-    private ArrayList<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public ProductDaoImpl() {
         products.add(new Product("IPhone 5" , 320));
@@ -29,7 +30,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ArrayList<Product> getAll() {
+    public List<Product> getAll() {
         return this.products;
     }
 

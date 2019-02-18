@@ -4,5 +4,5 @@ public interface MenuView {
     /**
      * This method is the entry point to the menu.
      */
-    void start();
+    boolean start();
 }

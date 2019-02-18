@@ -6,7 +6,7 @@ import com.sapozhnykov.view.menu.impl.MainMenuImpl;
 import java.io.IOException;
 
 public class App {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         MenuView menu = new MainMenuImpl();
         menu.start();
     }

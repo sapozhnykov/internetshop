@@ -1,6 +1,7 @@
 package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.domain.Product;
+import com.sapozhnykov.services.authorization.impl.AuthClientServiceImpl;
 import com.sapozhnykov.services.order.OrderService;
 import com.sapozhnykov.services.order.impl.OrderServiceImpl;
 import com.sapozhnykov.services.product.ProductService;
@@ -21,10 +22,12 @@ public class CatalogMenuImpl extends MenuImpl{
         System.out.println("1. Add product to the order");
         System.out.println("2. List orders");
         System.out.println("r. Return");
+        System.out.println("e. Exit");
     }
 
     @Override
-    protected void makeChoice() {
+    protected boolean makeChoice() {
+        boolean isWorkContinue = true;
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
@@ -37,10 +40,18 @@ public class CatalogMenuImpl extends MenuImpl{
                 case "r":
                     super.returnBack();
                     break;
+                case "e":
+                    isWorkContinue = false;
+                    super.returnBack();
+                    break;
                 default:
                     super.showErrorMessage();
             }
+            if(!isWorkContinue) {
+                super.returnBack();
+            }
         }
+        return isWorkContinue;
     }
 
     private void showAllProducts() {
@@ -66,7 +77,7 @@ public class CatalogMenuImpl extends MenuImpl{
         } while (choice.equals("y"));
 
         if(!selectedProducts.isEmpty()){
-            result = orderService.add(selectedProducts);
+            result = orderService.add(AuthClientServiceImpl.getCurrentUserId(), selectedProducts);
         }
 
         if(result) {

@@ -2,15 +2,19 @@ package com.sapozhnykov.dao.client;
 
 import com.sapozhnykov.domain.Client;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ClientDao {
+
     /**
-     * dd Client to the storage
-     * @param client - Client
-     * @return true if add is successful
+     * Add client to storage
+     * @param name - name of client
+     * @param surname - surname of client
+     * @param phone - phone of client
+     * @param email - email of client
+     * @return
      */
-    boolean add(Client client);
+    Client add(String name, String surname, String phone, String email);
 
     /**
      * Delete Client from the storage by ID
@@ -23,5 +27,5 @@ public interface ClientDao {
      * Get all Clients from the storage
      * @return all clients
      */
-    ArrayList<Client> getAll();
+    List<Client> getAll();
 }

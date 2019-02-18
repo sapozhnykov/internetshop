@@ -2,7 +2,7 @@ package com.sapozhnykov.dao.product;
 
 import com.sapozhnykov.domain.Product;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductDao {
     /**
@@ -23,7 +23,7 @@ public interface ProductDao {
      * Get all Products from the storage
      * @return all Products from the storage
      */
-    ArrayList<Product> getAll();
+    List<Product> getAll();
 
     /**
      * Get Product from the storage by ID

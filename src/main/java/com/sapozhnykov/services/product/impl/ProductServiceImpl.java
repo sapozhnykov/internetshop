@@ -5,7 +5,7 @@ import com.sapozhnykov.dao.product.impl.ProductDaoImpl;
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.product.ProductService;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
     private ProductDao productDao = new ProductDaoImpl();
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ArrayList<Product> getAllProduct() {
+    public List<Product> getAllProduct() {
         return productDao.getAll();
     }
 

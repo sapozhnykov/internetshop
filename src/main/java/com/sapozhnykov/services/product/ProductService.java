@@ -2,6 +2,7 @@ package com.sapozhnykov.services.product;
 
 import com.sapozhnykov.domain.Product;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductService {
     /**
@@ -23,7 +24,7 @@ public interface ProductService {
      * Return all Products
      * @return all Products
      */
-    ArrayList<Product> getAllProduct();
+    List<Product> getAllProduct();
 
     /**
      * Return Product by ID

@@ -18,7 +18,8 @@ public class ProductListMenuImpl extends MenuImpl {
     }
 
     @Override
-    protected void makeChoice(){
+    protected boolean makeChoice(){
+        boolean isWorkContinue = true;
         while (super.isRunningMenu) {
             showMenu();
             switch (super.inputParameter("number of menu")) {
@@ -32,12 +33,17 @@ public class ProductListMenuImpl extends MenuImpl {
                     super.returnBack();
                     break;
                 case "e":
-                    super.exit();
+                    isWorkContinue = false;
+                    super.returnBack();
                     break;
                 default:
                     super.showErrorMessage();
             }
+            if(!isWorkContinue) {
+                super.returnBack();
+            }
         }
+        return isWorkContinue;
     }
 
     private void showAllProducts() {
