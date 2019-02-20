@@ -29,4 +29,8 @@ public interface ClientService {
      */
     List<Client> getAllClient();
 
+    Client getById(String id);
+
+    boolean modifyClient(long clientId, String name, String surname, String phone, String email);
+
 }

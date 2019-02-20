@@ -8,8 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
+    private static OrderDao orderDao = new OrderDaoImpl();
+
     private List<Order> orders = new ArrayList<>();
     private static long tempID = 1;
+
+    private OrderDaoImpl() { }
 
     @Override
     public boolean add(long clientId, ArrayList<Product> products) {
@@ -18,7 +22,29 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public boolean deleteById(long id) {
+        Order tempOrder;
+
+        tempOrder = getById(id);
+        return orders.remove(tempOrder);
+    }
+
+    @Override
+    public Order getById(long id) {
+        for(Order order: orders) {
+            if(order.getId() == id) {
+                return order;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Order> getAll() {
         return this.orders;
+    }
+
+    public static OrderDao getInstance() {
+        return orderDao;
     }
 }

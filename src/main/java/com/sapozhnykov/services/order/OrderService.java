@@ -15,6 +15,13 @@ public interface OrderService {
     boolean add(long clientId, ArrayList<Product> products);
 
     /**
+     * Delete Order by ID
+     * @param id - ID of Order
+     * @return true if delete is successful
+     */
+    boolean deleteById(String id);
+
+    /**
      * Return all Orders
      * @return all Orders
      */

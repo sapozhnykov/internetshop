@@ -1,10 +1,14 @@
 package com.sapozhnykov.view.menu.impl;
 
+import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.product.ProductService;
-import com.sapozhnykov.services.product.impl.ProductServiceImpl;
 
 public class ProductListMenuImpl extends MenuImpl {
-    private final ProductService productService = new ProductServiceImpl();
+    private final ProductService productService;
+
+    public ProductListMenuImpl(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Override
     protected void showMenu() {
@@ -13,6 +17,7 @@ public class ProductListMenuImpl extends MenuImpl {
         System.out.println("______   Options   ______");
         System.out.println("1. Add new product");
         System.out.println("2. Delete product");
+        System.out.println("3. Modify product");
         System.out.println("r. Return");
         System.out.println("e. Exit");
     }
@@ -28,6 +33,9 @@ public class ProductListMenuImpl extends MenuImpl {
                     break;
                 case "2":
                     deleteProduct();
+                    break;
+                case "3":
+                    modifyProduct();
                     break;
                 case "r":
                     super.returnBack();
@@ -78,6 +86,38 @@ public class ProductListMenuImpl extends MenuImpl {
             System.out.println("product deleted!");
         } else {
             System.out.println("Error. product don't deleted!");
+        }
+        System.out.println();
+    }
+
+    private void modifyProduct() {
+        String tempId = "";
+        long productId;
+        String name;
+        String price;
+
+        boolean result;
+
+        tempId = super.inputParameter("product ID");
+        Product product = productService.getById(tempId);
+        if(product == null) {
+            System.out.println("Product not found");
+            return;
+        }
+
+        System.out.println("====== Product information: ======");
+        System.out.println(product);
+
+        productId = product.getId();
+        name = super.inputParameter("name");
+        price = super.inputParameter("price");
+
+        result = productService.modifyProduct(productId, name, price);
+
+        if(result) {
+            System.out.println("Product modified!");
+        } else {
+            System.out.println("Error. product not modified!");
         }
         System.out.println();
     }

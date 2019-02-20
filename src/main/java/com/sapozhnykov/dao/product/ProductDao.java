@@ -31,4 +31,6 @@ public interface ProductDao {
      * @return Product
      */
     Product getById(long id);
+
+    boolean modify(long productId, String name, double price);
 }

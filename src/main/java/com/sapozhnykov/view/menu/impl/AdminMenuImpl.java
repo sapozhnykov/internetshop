@@ -3,8 +3,15 @@ package com.sapozhnykov.view.menu.impl;
 import com.sapozhnykov.view.menu.MenuView;
 
 public class AdminMenuImpl extends MenuImpl {
-    private final MenuView clientListMenu = new ClientListMenuImpl();
-    private final MenuView productListMenu = new ProductListMenuImpl();
+    private final MenuView clientListMenu;
+    private final MenuView productListMenu;
+    private final MenuView orderListMenu;
+
+    public AdminMenuImpl(MenuView clientListMenu, MenuView productListMenu, MenuView orderListMenu) {
+        this.clientListMenu = clientListMenu;
+        this.productListMenu = productListMenu;
+        this.orderListMenu = orderListMenu;
+    }
 
     @Override
     protected void showMenu() {
@@ -12,6 +19,7 @@ public class AdminMenuImpl extends MenuImpl {
         System.out.println("______   Options  ______");
         System.out.println("1. Show client list");
         System.out.println("2. Show product list");
+        System.out.println("3. Show order list");
         System.out.println("r. Return");
         System.out.println("e. Exit");
     }
@@ -27,6 +35,9 @@ public class AdminMenuImpl extends MenuImpl {
                     break;
                 case "2":
                     isWorkContinue = productListMenu.start();
+                    break;
+                case "3":
+                    isWorkContinue = orderListMenu.start();
                     break;
                 case "r":
                     super.returnBack();

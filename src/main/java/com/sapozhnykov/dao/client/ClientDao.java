@@ -28,4 +28,8 @@ public interface ClientDao {
      * @return all clients
      */
     List<Client> getAll();
+
+    Client getById(long id);
+
+    boolean modify(long clientId, String name, String surname, String phone, String email);
 }

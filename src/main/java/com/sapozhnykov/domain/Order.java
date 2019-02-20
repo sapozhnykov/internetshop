@@ -6,7 +6,7 @@ import java.util.List;
 public class Order {
     private long id;
     private long clientId;
-    private List<Product> products;
+    private ArrayList<Product> products;
 
     public Order(long id, long clientId, ArrayList<Product> products) {
         this.id = id;

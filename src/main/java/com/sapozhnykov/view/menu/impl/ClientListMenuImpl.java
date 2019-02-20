@@ -1,11 +1,17 @@
 package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.domain.Client;
+import com.sapozhnykov.services.authorization.AuthClientService;
 import com.sapozhnykov.services.client.ClientService;
-import com.sapozhnykov.services.client.impl.ClientServiceImpl;
 
 public class ClientListMenuImpl extends MenuImpl{
-    private final ClientService clientService = new ClientServiceImpl();
+    private final ClientService clientService;
+    private final AuthClientService authClientService;
+
+    public ClientListMenuImpl(ClientService clientService, AuthClientService authClientService) {
+        this.clientService = clientService;
+        this.authClientService = authClientService;
+    }
 
     @Override
     protected void showMenu() {
@@ -14,6 +20,7 @@ public class ClientListMenuImpl extends MenuImpl{
         System.out.println("______   Options   ______");
         System.out.println("1. Add new client");
         System.out.println("2. Delete client");
+        System.out.println("3. Modify client");
         System.out.println("r. Return");
         System.out.println("e. Exit");
     }
@@ -29,6 +36,9 @@ public class ClientListMenuImpl extends MenuImpl{
                     break;
                 case "2":
                     deleteClient();
+                    break;
+                case "3":
+                    modifyClient();
                     break;
                 case "r":
                     super.returnBack();
@@ -62,13 +72,18 @@ public class ClientListMenuImpl extends MenuImpl{
         phone = super.inputParameter("phone");
         email = super.inputParameter("email");
 
-        Client client = clientService.createClient(name, surname, phone, email);
-        if(client != null) {
-            System.out.println("client saved!");
+        if(!authClientService.isLoginExists(phone)) {
+            Client client = clientService.createClient(name, surname, phone, email);
+            if(client != null) {
+                System.out.println("Client saved!");
+            } else {
+                System.out.println("Error. client don't saved!");
+            }
+            System.out.println();
         } else {
-            System.out.println("Error. client don't saved!");
+            System.out.println("Sorry, this number of phone already registered");
         }
-        System.out.println();
+
     }
 
     private void deleteClient() {
@@ -78,9 +93,45 @@ public class ClientListMenuImpl extends MenuImpl{
         tempId = super.inputParameter("client ID");
         result = clientService.deleteClientById(tempId);
         if(result) {
-            System.out.println("client deleted!");
+            System.out.println("Client deleted!");
         } else {
             System.out.println("Error. client don't deleted!");
+        }
+        System.out.println();
+    }
+
+    private void modifyClient() {
+        String tempId = "";
+        long clientId;
+        String name;
+        String surname;
+        String phone;
+        String email;
+
+        boolean result;
+
+        tempId = super.inputParameter("client ID");
+        Client client = clientService.getById(tempId);
+        if(client == null) {
+            System.out.println("Client not found");
+            return;
+        }
+
+        System.out.println("====== Client information: ======");
+        System.out.println(client);
+
+        clientId = client.getId();
+        name = super.inputParameter("name");
+        surname = super.inputParameter("surname");
+        phone = super.inputParameter("phone");
+        email = super.inputParameter("email");
+
+        result = clientService.modifyClient(clientId, name, surname, phone, email);
+
+        if(result) {
+            System.out.println("Client modified!");
+        } else {
+            System.out.println("Error. client don't modified!");
         }
         System.out.println();
     }
