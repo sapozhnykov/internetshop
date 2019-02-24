@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
-    private static ProductDao productDao = new ProductDaoImpl();
+    private static final ProductDao PRODUCT_DAO = new ProductDaoImpl();
 
     private List<Product> products = new ArrayList<>();
 
@@ -60,6 +60,6 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public static ProductDao getInstance() {
-        return productDao;
+        return PRODUCT_DAO;
     }
 }

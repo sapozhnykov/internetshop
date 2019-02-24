@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDaoImpl implements ClientDao {
-    private static ClientDao clientDao = new ClientDaoImpl();
+    private static final ClientDao CLIENT_DAO = new ClientDaoImpl();
 
     private List<Client> clients = new ArrayList<>();
     private static long tempID = 3;
 
     private ClientDaoImpl() {
+        initDefaultClient();
+    }
+
+    private void initDefaultClient() {
         clients.add(new Client(1,"David" , "Cramer", "0503213232", "david@gmail.com"));
         clients.add(new Client(2,"Greg" , "Popovich", "0974321222", "greg@gmail.com"));
     }
@@ -70,6 +74,6 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     public static ClientDao getInstance() {
-        return clientDao;
+        return CLIENT_DAO;
     }
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
-    private static OrderDao orderDao = new OrderDaoImpl();
+    private static final OrderDao ORDER_DAO = new OrderDaoImpl();
 
     private List<Order> orders = new ArrayList<>();
     private static long tempID = 1;
@@ -23,9 +23,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public boolean deleteById(long id) {
-        Order tempOrder;
-
-        tempOrder = getById(id);
+        Order tempOrder = getById(id);
         return orders.remove(tempOrder);
     }
 
@@ -45,6 +43,6 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     public static OrderDao getInstance() {
-        return orderDao;
+        return ORDER_DAO;
     }
 }

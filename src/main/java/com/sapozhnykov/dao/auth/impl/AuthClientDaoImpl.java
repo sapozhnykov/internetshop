@@ -1,4 +1,4 @@
-package com.sapozhnykov.dao.auth.Impl;
+package com.sapozhnykov.dao.auth.impl;
 
 import com.sapozhnykov.dao.auth.AuthClientDao;
 import com.sapozhnykov.domain.AuthClient;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthClientDaoImpl implements AuthClientDao {
-    private static AuthClientDao authClientDao = new AuthClientDaoImpl();
+    private static final AuthClientDao AUTH_CLIENT_DAO = new AuthClientDaoImpl();
 
     private List<AuthClient> authClients = new ArrayList<>();
     private static long tempID = 3;
@@ -62,6 +62,6 @@ public class AuthClientDaoImpl implements AuthClientDao {
     }
 
     public static AuthClientDao getInstance() {
-        return authClientDao;
+        return AUTH_CLIENT_DAO;
     }
 }
