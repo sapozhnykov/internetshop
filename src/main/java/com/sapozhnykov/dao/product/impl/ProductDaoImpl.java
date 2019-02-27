@@ -12,10 +12,7 @@ public class ProductDaoImpl implements ProductDao {
     private List<Product> products = new ArrayList<>();
 
     private ProductDaoImpl() {
-        products.add(new Product("IPhone 5" , 320));
-        products.add(new Product("IPhone 6" , 340));
-        products.add(new Product("IPhone 8 plus" , 430));
-        products.add(new Product("IPhone 10" , 840));
+
     }
 
     @Override

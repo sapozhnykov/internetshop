@@ -3,14 +3,8 @@ package com.sapozhnykov.view.menu.impl;
 import com.sapozhnykov.view.menu.MenuView;
 
 public class MainMenuImpl extends MenuImpl {
-    private final MenuView adminMenu;
-    private final MenuView authClientMenu;
-
-
-    public MainMenuImpl(MenuView authClientMenu, MenuView adminMenu) {
-        this.authClientMenu = authClientMenu;
-        this.adminMenu = adminMenu;
-    }
+    private final MenuView adminMenu = new AdminMenuImpl();
+    private final MenuView authClientMenu = new AuthClientMenuImpl();
 
     @Override
     protected void showMenu() {

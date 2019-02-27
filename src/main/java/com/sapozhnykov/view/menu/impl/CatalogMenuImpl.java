@@ -2,19 +2,16 @@ package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.authorization.impl.AuthClientServiceImpl;
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.services.order.OrderService;
 import com.sapozhnykov.services.product.ProductService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CatalogMenuImpl extends MenuImpl{
-    private final ProductService productService;
-    private final OrderService orderService;
-
-    public CatalogMenuImpl(ProductService productService, OrderService orderService) {
-        this.productService = productService;
-        this.orderService = orderService;
-    }
+    private final ProductService productService = ServiceLocator.getServiceByName("ProductService");
+    private final OrderService orderService = ServiceLocator.getServiceByName("OrderService");
 
     @Override
     protected void showMenu() {
@@ -65,7 +62,7 @@ public class CatalogMenuImpl extends MenuImpl{
         boolean result = false;
         Product product;
         String choice;
-        ArrayList<Product> selectedProducts = new ArrayList<>();
+        List<Product> selectedProducts = new ArrayList<>();
 
         do{
             tempId = super.inputParameter("product ID");

@@ -16,7 +16,7 @@ public class OrderDaoImpl implements OrderDao {
     private OrderDaoImpl() { }
 
     @Override
-    public boolean add(long clientId, ArrayList<Product> products) {
+    public boolean add(long clientId, List<Product> products) {
         Order order = new Order(tempID++, clientId, products);
         return orders.add(order);
     }

@@ -1,14 +1,11 @@
 package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.domain.Product;
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.services.product.ProductService;
 
 public class ProductListMenuImpl extends MenuImpl {
-    private final ProductService productService;
-
-    public ProductListMenuImpl(ProductService productService) {
-        this.productService = productService;
-    }
+    private final ProductService productService = ServiceLocator.getServiceByName("ProductService");
 
     @Override
     protected void showMenu() {

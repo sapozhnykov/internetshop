@@ -1,13 +1,11 @@
 package com.sapozhnykov;
 
-import com.sapozhnykov.services.locator.LocatorService;
-import com.sapozhnykov.services.locator.impl.LocatorServiceImpl;
 import com.sapozhnykov.view.menu.MenuView;
+import com.sapozhnykov.view.menu.impl.MainMenuImpl;
 
 public class App {
     public static void main(String[] args) {
-        LocatorService locatorService = new LocatorServiceImpl();
-        MenuView mainMenu = locatorService.start();
+        MenuView mainMenu = new MainMenuImpl();
         mainMenu.start();
     }
 }

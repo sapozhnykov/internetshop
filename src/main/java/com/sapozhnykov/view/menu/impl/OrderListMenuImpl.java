@@ -1,13 +1,10 @@
 package com.sapozhnykov.view.menu.impl;
 
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.services.order.OrderService;
 
 public class OrderListMenuImpl extends MenuImpl {
-    private final OrderService orderService;
-
-    public OrderListMenuImpl(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final OrderService orderService = ServiceLocator.getServiceByName("OrderService");
 
     @Override
     protected void showMenu() {

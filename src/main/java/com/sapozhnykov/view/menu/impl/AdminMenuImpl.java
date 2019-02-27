@@ -3,15 +3,9 @@ package com.sapozhnykov.view.menu.impl;
 import com.sapozhnykov.view.menu.MenuView;
 
 public class AdminMenuImpl extends MenuImpl {
-    private final MenuView clientListMenu;
-    private final MenuView productListMenu;
-    private final MenuView orderListMenu;
-
-    public AdminMenuImpl(MenuView clientListMenu, MenuView productListMenu, MenuView orderListMenu) {
-        this.clientListMenu = clientListMenu;
-        this.productListMenu = productListMenu;
-        this.orderListMenu = orderListMenu;
-    }
+    private final MenuView clientListMenu = new ClientListMenuImpl();
+    private final MenuView productListMenu = new ProductListMenuImpl();
+    private final MenuView orderListMenu = new OrderListMenuImpl();
 
     @Override
     protected void showMenu() {

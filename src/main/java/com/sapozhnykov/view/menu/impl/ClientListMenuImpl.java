@@ -3,15 +3,11 @@ package com.sapozhnykov.view.menu.impl;
 import com.sapozhnykov.domain.Client;
 import com.sapozhnykov.services.authorization.AuthClientService;
 import com.sapozhnykov.services.client.ClientService;
+import com.sapozhnykov.services.locator.ServiceLocator;
 
 public class ClientListMenuImpl extends MenuImpl{
-    private final ClientService clientService;
-    private final AuthClientService authClientService;
-
-    public ClientListMenuImpl(ClientService clientService, AuthClientService authClientService) {
-        this.clientService = clientService;
-        this.authClientService = authClientService;
-    }
+    private final ClientService clientService = ServiceLocator.getServiceByName("ClientService");
+    private final AuthClientService authClientService = ServiceLocator.getServiceByName("AuthClientService");
 
     @Override
     protected void showMenu() {

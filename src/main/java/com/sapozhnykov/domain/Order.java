@@ -1,6 +1,5 @@
 package com.sapozhnykov.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -8,7 +7,7 @@ public class Order {
     private long clientId;
     private List<Product> products;
 
-    public Order(long id, long clientId, ArrayList<Product> products) {
+    public Order(long id, long clientId, List<Product> products) {
         this.id = id;
         this.clientId = clientId;
         this.products = products;
@@ -28,7 +27,7 @@ public class Order {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 

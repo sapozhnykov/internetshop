@@ -13,12 +13,7 @@ public class ClientDaoImpl implements ClientDao {
     private static long tempID = 3;
 
     private ClientDaoImpl() {
-        initDefaultClient();
-    }
 
-    private void initDefaultClient() {
-        clients.add(new Client(1,"David" , "Cramer", "0503213232", "david@gmail.com"));
-        clients.add(new Client(2,"Greg" , "Popovich", "0974321222", "greg@gmail.com"));
     }
 
     @Override

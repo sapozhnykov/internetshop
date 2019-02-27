@@ -5,19 +5,14 @@ import com.sapozhnykov.dao.client.impl.ClientDaoImpl;
 import com.sapozhnykov.domain.Client;
 import com.sapozhnykov.exceptions.BusinessException;
 import com.sapozhnykov.services.client.ClientService;
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.validators.ValidationService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
-    private ClientDao clientDao;
-    private ValidationService validationService;
-
-    public ClientServiceImpl(ClientDao clientDao, ValidationService validationService) {
-        this.clientDao = clientDao;
-        this.validationService = validationService;
-    }
+    private ClientDao clientDao = ClientDaoImpl.getInstance();
+    private ValidationService validationService = ServiceLocator.getServiceByName("ValidationService");
 
     @Override
     public Client createClient(String name, String surname, String phone, String email) {
@@ -72,5 +67,10 @@ public class ClientServiceImpl implements ClientService {
             System.out.println( ex.getMessage() );
         }
         return result;
+    }
+
+    @Override
+    public String getName() {
+        return "ClientService";
     }
 }

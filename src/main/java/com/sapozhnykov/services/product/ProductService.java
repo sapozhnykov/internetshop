@@ -33,4 +33,6 @@ public interface ProductService {
     Product getById(String id);
 
     boolean modifyProduct(long productId, String name, String price);
+
+    public String getName();
 }

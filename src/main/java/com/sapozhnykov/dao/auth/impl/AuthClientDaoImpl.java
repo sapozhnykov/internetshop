@@ -13,8 +13,7 @@ public class AuthClientDaoImpl implements AuthClientDao {
     private static long tempID = 3;
 
     private AuthClientDaoImpl() {
-        authClients.add(new AuthClient(1, 1, "0501234567", "1234567"));
-        authClients.add(new AuthClient(2, 2, "0974321222", "0987654"));
+
     }
 
     @Override
