@@ -2,17 +2,16 @@ package com.sapozhnykov.view.menu.impl;
 
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.authorization.impl.AuthClientServiceImpl;
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.services.order.OrderService;
-import com.sapozhnykov.services.order.impl.OrderServiceImpl;
 import com.sapozhnykov.services.product.ProductService;
-import com.sapozhnykov.services.product.impl.ProductServiceImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CatalogMenuImpl extends MenuImpl{
-    private final ProductService productService = new ProductServiceImpl();
-    private final OrderService orderService = new OrderServiceImpl();
-    private ArrayList<Product> selectedProducts = new ArrayList<>();
+    private final ProductService productService = ServiceLocator.getServiceByName("ProductService");
+    private final OrderService orderService = ServiceLocator.getServiceByName("OrderService");
 
     @Override
     protected void showMenu() {
@@ -63,6 +62,7 @@ public class CatalogMenuImpl extends MenuImpl{
         boolean result = false;
         Product product;
         String choice;
+        List<Product> selectedProducts = new ArrayList<>();
 
         do{
             tempId = super.inputParameter("product ID");
@@ -73,7 +73,7 @@ public class CatalogMenuImpl extends MenuImpl{
                 System.out.println("Product not found");
             }
             System.out.println("Would you like to add one more? (y/n)");
-            choice = super.inputParameter("Make a choice");
+            choice = super.inputParameter("your choice");
         } while (choice.equals("y"));
 
         if(!selectedProducts.isEmpty()){
@@ -89,6 +89,7 @@ public class CatalogMenuImpl extends MenuImpl{
     }
 
     private void listOrders() {
+        System.out.println("==== Your Orders ====");
         orderService.getAll().forEach(System.out::println);
     }
 }

@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
+    private static final ProductDao PRODUCT_DAO = new ProductDaoImpl();
+
     private List<Product> products = new ArrayList<>();
 
-    public ProductDaoImpl() {
-        products.add(new Product("IPhone 5" , 320));
-        products.add(new Product("IPhone 6" , 340));
-        products.add(new Product("IPhone 8 plus" , 430));
-        products.add(new Product("IPhone 10" , 840));
+    private ProductDaoImpl() {
+
     }
 
     @Override
@@ -42,5 +41,22 @@ public class ProductDaoImpl implements ProductDao {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean modify(long productId, String name, double price) {
+        boolean result = false;
+        for(Product product: products) {
+            if(product.getId() == productId) {
+                product.setName(name);
+                product.setPrice(price);
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public static ProductDao getInstance() {
+        return PRODUCT_DAO;
     }
 }

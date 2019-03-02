@@ -1,7 +1,6 @@
 package com.sapozhnykov.services.product;
 
 import com.sapozhnykov.domain.Product;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductService {
@@ -32,4 +31,8 @@ public interface ProductService {
      * @return Product
      */
     Product getById(String id);
+
+    boolean modifyProduct(long productId, String name, String price);
+
+    public String getName();
 }

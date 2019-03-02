@@ -3,12 +3,15 @@ package com.sapozhnykov.services.product.impl;
 import com.sapozhnykov.dao.product.ProductDao;
 import com.sapozhnykov.dao.product.impl.ProductDaoImpl;
 import com.sapozhnykov.domain.Product;
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.services.product.ProductService;
+import com.sapozhnykov.validators.ValidationService;
 
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
-    private ProductDao productDao = new ProductDaoImpl();
+    private ProductDao productDao = ProductDaoImpl.getInstance();
+    private ValidationService validationService = ServiceLocator.getServiceByName("ValidationService");
 
     @Override
     public boolean addProduct(String name, String price) {
@@ -51,5 +54,20 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return productDao.getById(tempId);
+    }
+
+    public boolean modifyProduct(long productId, String name, String price){
+        double tempPrice;
+        try {
+            tempPrice = Double.parseDouble(price);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return productDao.modify(productId, name, tempPrice);
+    }
+
+    @Override
+    public String getName() {
+        return "ProductService";
     }
 }

@@ -1,16 +1,21 @@
 package com.sapozhnykov.view.menu.impl;
 
+import com.sapozhnykov.domain.Client;
+import com.sapozhnykov.services.authorization.impl.AuthClientServiceImpl;
+import com.sapozhnykov.services.client.ClientService;
+import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.view.menu.MenuView;
 
 public class ClientMenuImpl extends MenuImpl {
     private final MenuView catalogMenu = new CatalogMenuImpl();
+    private final ClientService clientService = ServiceLocator.getServiceByName("ClientService");
 
     @Override
     protected void showMenu() {
         System.out.println("====== CLIENT MENU ======");
         System.out.println("______   Options   ______");
         System.out.println("1. Show catalog");
-        System.out.println("2. Account settings");
+        System.out.println("2. Modify my account");
         System.out.println("r. Return");
         System.out.println("e. Exit");
     }
@@ -25,7 +30,7 @@ public class ClientMenuImpl extends MenuImpl {
                     isWorkContinue = catalogMenu.start();
                     break;
                 case "2":
-                    System.out.println("ACCOUNT SETTINGS");
+                    modifyMyAccount();
                     break;
                 case "r":
                     super.returnBack();
@@ -42,5 +47,26 @@ public class ClientMenuImpl extends MenuImpl {
             }
         }
         return isWorkContinue;
+    }
+
+    private void modifyMyAccount() {
+        long userId = AuthClientServiceImpl.getCurrentUserId();
+        Client client = clientService.getById(userId+"");
+        System.out.println("===== User information =====");
+        System.out.println(client);
+
+        String name = super.inputParameter("name");
+        String surname = super.inputParameter("surname");
+        String phone = super.inputParameter("phone");
+        String email = super.inputParameter("email");
+
+        boolean result = clientService.modifyClient(userId, name, surname, phone, email);
+
+        if(result) {
+            System.out.println("Modified!");
+        } else {
+            System.out.println("Error. Not modified!");
+        }
+        System.out.println();
     }
 }

@@ -2,7 +2,6 @@ package com.sapozhnykov.services.client;
 
 import com.sapozhnykov.domain.Client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ClientService {
@@ -29,4 +28,9 @@ public interface ClientService {
      */
     List<Client> getAllClient();
 
+    Client getById(String id);
+
+    boolean modifyClient(long clientId, String name, String surname, String phone, String email);
+
+    String getName();
 }

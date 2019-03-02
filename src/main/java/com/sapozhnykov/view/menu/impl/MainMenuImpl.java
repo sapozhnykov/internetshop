@@ -6,7 +6,6 @@ public class MainMenuImpl extends MenuImpl {
     private final MenuView adminMenu = new AdminMenuImpl();
     private final MenuView authClientMenu = new AuthClientMenuImpl();
 
-
     @Override
     protected void showMenu() {
         System.out.println("====== MAIN MENU ======");
