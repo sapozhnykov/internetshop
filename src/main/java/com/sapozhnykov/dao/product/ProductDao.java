@@ -7,10 +7,11 @@ import java.util.List;
 public interface ProductDao {
     /**
      * Add Product to the storage
-     * @param product - Product
+     * @param name - name of product
+     * @param price - price of product
      * @return true if add is successful
      */
-    boolean add(Product product);
+    boolean add(String name, double price);
 
     /**
      * Delete Product from the storage by ID

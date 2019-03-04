@@ -1,7 +1,7 @@
 package com.sapozhnykov.services.order.impl;
 
 import com.sapozhnykov.dao.order.OrderDao;
-import com.sapozhnykov.dao.order.impl.OrderDaoImpl;
+import com.sapozhnykov.dao.order.impl.OrderDBDaoImpl;
 import com.sapozhnykov.domain.Order;
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.locator.ServiceLocator;
@@ -11,7 +11,7 @@ import com.sapozhnykov.validators.ValidationService;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
-    private OrderDao orderDao = OrderDaoImpl.getInstance();
+    private OrderDao orderDao = OrderDBDaoImpl.getInstance();
     private ValidationService validationService = ServiceLocator.getServiceByName("ValidationService");
 
     @Override

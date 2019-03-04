@@ -1,7 +1,7 @@
 package com.sapozhnykov.services.product.impl;
 
 import com.sapozhnykov.dao.product.ProductDao;
-import com.sapozhnykov.dao.product.impl.ProductDaoImpl;
+import com.sapozhnykov.dao.product.impl.ProductDBDaoImpl;
 import com.sapozhnykov.domain.Product;
 import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.services.product.ProductService;
@@ -10,7 +10,7 @@ import com.sapozhnykov.validators.ValidationService;
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
-    private ProductDao productDao = ProductDaoImpl.getInstance();
+    private ProductDao productDao = ProductDBDaoImpl.getInstance();
     private ValidationService validationService = ServiceLocator.getServiceByName("ValidationService");
 
     @Override
@@ -21,8 +21,9 @@ public class ProductServiceImpl implements ProductService {
         } catch (NumberFormatException e) {
             return false;
         }
-        Product client = new Product(name, tempPrice);
-        boolean result = productDao.add(client);
+//        Product client = new Product(name, tempPrice);
+//        boolean result = productDao.add(client);
+        boolean result = productDao.add(name, tempPrice);
         return result;
     }
 

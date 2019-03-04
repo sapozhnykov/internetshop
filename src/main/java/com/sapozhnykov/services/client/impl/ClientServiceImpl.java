@@ -2,7 +2,6 @@ package com.sapozhnykov.services.client.impl;
 
 import com.sapozhnykov.dao.client.ClientDao;
 import com.sapozhnykov.dao.client.impl.ClientDBDaoImpl;
-import com.sapozhnykov.dao.client.impl.ClientDaoImpl;
 import com.sapozhnykov.domain.Client;
 import com.sapozhnykov.exceptions.BusinessException;
 import com.sapozhnykov.services.client.ClientService;
@@ -12,7 +11,6 @@ import com.sapozhnykov.validators.ValidationService;
 import java.util.List;
 
 public class ClientServiceImpl implements ClientService {
-//    private ClientDao clientDao = ClientDaoImpl.getInstance();
     private ClientDao clientDao = ClientDBDaoImpl.getInstance();
     private ValidationService validationService = ServiceLocator.getServiceByName("ValidationService");
 
