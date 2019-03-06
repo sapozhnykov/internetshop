@@ -62,9 +62,6 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
             statement.setString(3, password);
             int rows = statement.executeUpdate();
 
-            statement.close();
-            connection.close();
-
             if(rows > 0) {
                 return true;
             }
