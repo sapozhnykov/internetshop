@@ -16,78 +16,80 @@ public class ClientDBDaoImpl implements ClientDao {
     private static final String PASSWORD = "";
 
     private ClientDBDaoImpl() {
-
-//        try ( Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
-//              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME, EMAIL, PHONE) VALUES(?, ?, ?, ?)") )
-//        {
-////            statement.execute("INSERT INTO CLIENT(NAME, SURNAME, EMAIL, PHONE) VALUES('TEST', 'TEST', 'test@gmail.com', '0501111111');");
-//            statement.setString(1, "VASYA");
-//            statement.setString(2, "POPOV");
-//            statement.setString(3, "vasya@gmail.com");
-//            statement.setString(4, "0509999999");
-//            statement.execute();
-//
-//            statement.close();
-//            connection.close();
-//        } catch (SQLException e) {
-//            System.out.println("DB NOT WORK!!!");
-////            e.printStackTrace();
-//        }
+        try ( Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
+              PreparedStatement statement = connection.prepareStatement(
+                      "CREATE TABLE IF NOT EXISTS CLIENT (ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(255), SURNAME VARCHAR(255), EMAIL VARCHAR(255), PHONE VARCHAR(255))"))
+        {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Client add(String name, String surname, String phone, String email) {
+        Client client = null;
+
         try ( Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
-              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME, EMAIL, PHONE) VALUES(?, ?, ?, ?)") )
+              PreparedStatement statement = connection.prepareStatement("INSERT INTO CLIENT(NAME, SURNAME, EMAIL, PHONE) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS) )
         {
-//            statement.execute("INSERT INTO CLIENT(NAME, SURNAME, EMAIL, PHONE) VALUES('TEST', 'TEST', 'test@gmail.com', '0501111111');");
             statement.setString(1, name);
             statement.setString(2, surname);
             statement.setString(3, email);
             statement.setString(4, phone);
-            statement.execute();
+            statement.executeUpdate();
 
-            statement.close();
-            connection.close();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                long newID = resultSet.getLong(1);
+                client = new Client(newID, name , surname, phone, email);
+            }
         } catch (SQLException e) {
-            System.out.println("SOMETHING WRONG!!!");
-//            e.printStackTrace();
+            e.printStackTrace();
         }
-        Client client = new Client(1000, name , surname, phone, email);
+
         return client;
     }
 
     @Override
     public boolean deleteById(long id) {
+        try ( Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
+              PreparedStatement statement = connection.prepareStatement("DELETE FROM CLIENT WHERE ID=?;") )
+        {
+            statement.setLong(1, id);
+            int rows = statement.executeUpdate();
+            if(rows > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public List<Client> getAll() {
         List<Client> clients = new ArrayList<>();
-        String clientID;
+        long clientID;
         String name;
         String surname;
         String email;
         String phone;
         try ( Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
-              Statement statement = connection.createStatement() )
+              PreparedStatement statement = connection.prepareStatement("SELECT * FROM CLIENT;") )
         {
-            try (ResultSet resultSet = statement.executeQuery("SELECT * FROM CLIENT;")){
+            try (ResultSet resultSet = statement.executeQuery()){
                 while(resultSet.next()) {
-                    clientID = resultSet.getString(1);
-                    name = resultSet.getString(2);
-                    surname = resultSet.getString(3);
+                    clientID = resultSet.getLong("ID");
+                    name = resultSet.getString("NAME");
+                    surname = resultSet.getString("SURNAME");
                     email = resultSet.getString("EMAIL");
                     phone = resultSet.getString("PHONE");
-                    clients.add(new Client(Long.parseLong(clientID), name, surname, phone, email));
+                    clients.add(new Client(clientID, name, surname, phone, email));
                 }
-                statement.close();
-                connection.close();
             }
         } catch (SQLException e) {
-            System.out.println("SOMETHING WRONG!!!");
-//            e.printStackTrace();
+            e.printStackTrace();
         }
         return clients;
     }
@@ -101,24 +103,19 @@ public class ClientDBDaoImpl implements ClientDao {
         {
             statement.setLong(1, id);
 
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-//            resultSet.previous();
+            try(ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
 
-            long clientID = resultSet.getLong(1);
-            String name = resultSet.getString(2);
-            String surname = resultSet.getString(3);
-            String email = resultSet.getString("EMAIL");
-            String phone = resultSet.getString("PHONE");
+                long clientID = resultSet.getLong("ID");
+                String name = resultSet.getString("NAME");
+                String surname = resultSet.getString("SURNAME");
+                String email = resultSet.getString("EMAIL");
+                String phone = resultSet.getString("PHONE");
 
-            newClient = new Client(clientID, name, surname, phone, email);
-
-            resultSet.close();
-            statement.close();
-            connection.close();
+                newClient = new Client(clientID, name, surname, phone, email);
+            }
         } catch (SQLException e) {
-            System.out.println("SOMETHING WRONG!!!");
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 
         return newClient;
@@ -126,6 +123,24 @@ public class ClientDBDaoImpl implements ClientDao {
 
     @Override
     public boolean modify(long clientId, String name, String surname, String phone, String email) {
+
+        try ( Connection connection = DriverManager.getConnection(DB_URL, LOGIN, PASSWORD);
+              PreparedStatement statement = connection.prepareStatement("UPDATE CLIENT SET NAME=? , SURNAME=?, EMAIL=?, PHONE=? WHERE ID=?;") )
+        {
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, email);
+            statement.setString(4, phone);
+            statement.setLong(5, clientId);
+            int rows = statement.executeUpdate();
+            if(rows > 0) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 

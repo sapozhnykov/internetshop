@@ -1,7 +1,7 @@
 package com.sapozhnykov.services.authorization.impl;
 
 import com.sapozhnykov.dao.auth.AuthClientDao;
-import com.sapozhnykov.dao.auth.impl.AuthClientDaoImpl;
+import com.sapozhnykov.dao.auth.impl.AuthClientDBDaoImpl;
 import com.sapozhnykov.domain.AuthClient;
 import com.sapozhnykov.exceptions.BusinessException;
 import com.sapozhnykov.services.authorization.AuthClientService;
@@ -9,7 +9,7 @@ import com.sapozhnykov.services.locator.ServiceLocator;
 import com.sapozhnykov.validators.ValidationService;
 
 public class AuthClientServiceImpl implements AuthClientService {
-    private AuthClientDao authClientDao = AuthClientDaoImpl.getInstance();
+    private AuthClientDao authClientDao = AuthClientDBDaoImpl.getInstance();
     private ValidationService validationService = ServiceLocator.getServiceByName("ValidationService");
 
     private static long currentUserId = -1;
