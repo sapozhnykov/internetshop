@@ -21,9 +21,6 @@ public class ClientDBDaoImpl implements ClientDao {
                       "CREATE TABLE IF NOT EXISTS CLIENT (ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(255), SURNAME VARCHAR(255), EMAIL VARCHAR(255), PHONE VARCHAR(255))"))
         {
             statement.executeUpdate();
-
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,9 +44,6 @@ public class ClientDBDaoImpl implements ClientDao {
                 long newID = resultSet.getLong(1);
                 client = new Client(newID, name , surname, phone, email);
             }
-
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,8 +87,6 @@ public class ClientDBDaoImpl implements ClientDao {
                     phone = resultSet.getString("PHONE");
                     clients.add(new Client(clientID, name, surname, phone, email));
                 }
-//                statement.close();
-//                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,11 +113,7 @@ public class ClientDBDaoImpl implements ClientDao {
                 String phone = resultSet.getString("PHONE");
 
                 newClient = new Client(clientID, name, surname, phone, email);
-
-//                resultSet.close();
             }
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

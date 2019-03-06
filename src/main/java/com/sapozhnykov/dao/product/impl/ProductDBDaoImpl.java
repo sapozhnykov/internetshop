@@ -20,9 +20,6 @@ public class ProductDBDaoImpl implements ProductDao {
                       "CREATE TABLE IF NOT EXISTS PRODUCT (ID BIGINT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR(255), PRICE DOUBLE);"))
         {
             statement.executeUpdate();
-
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,9 +33,6 @@ public class ProductDBDaoImpl implements ProductDao {
             statement.setString(1, name);
             statement.setDouble(2, price);
             int rows = statement.executeUpdate();
-
-//            statement.close();
-//            connection.close();
 
             if(rows > 0) {
                 return true;
@@ -82,8 +76,6 @@ public class ProductDBDaoImpl implements ProductDao {
                     price = resultSet.getDouble("PRICE");
                     products.add(new Product(productID, name, price));
                 }
-//                statement.close();
-//                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,11 +100,7 @@ public class ProductDBDaoImpl implements ProductDao {
                 double price = resultSet.getDouble("PRICE");
 
                 newProduct = new Product(productID, name, price);
-
-//                resultSet.close();
             }
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

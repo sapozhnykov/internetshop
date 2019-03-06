@@ -10,9 +10,6 @@ import java.util.List;
 public class AuthClientDBDaoImpl implements AuthClientDao {
     private static final AuthClientDao AUTH_CLIENT_DAO = new AuthClientDBDaoImpl();
 
-    private List<AuthClient> authClients = new ArrayList<>();
-    private static long tempID = -1;
-
     private static final String DB_URL = "jdbc:h2:tcp://localhost/~/LuxoftShop";
     private static final String LOGIN = "admin";
     private static final String PASSWORD = "";
@@ -23,9 +20,6 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
                       "CREATE TABLE IF NOT EXISTS AUTHCLIENT (ID BIGINT PRIMARY KEY AUTO_INCREMENT, USERID BIGINT, PHONE VARCHAR(255), PASSWORD VARCHAR(255))"))
         {
             statement.executeUpdate();
-
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,12 +44,7 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
 
                     authClient = new AuthClient(tempUserID, authID, tempPhone, tempPassword);
                 }
-
-
-//                resultSet.close();
             }
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,8 +110,6 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
                     password = resultSet.getString("PASSWORD");
                     authClients.add(new AuthClient(authID, userID, phone, password));
                 }
-//                statement.close();
-//                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -144,10 +131,7 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
                 if(resultSet.next()) {
                     result = true;
                 }
-//                resultSet.close();
             }
-//            statement.close();
-//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
