@@ -22,8 +22,8 @@ public class ClientDBDaoImpl implements ClientDao {
         {
             statement.executeUpdate();
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,8 +48,8 @@ public class ClientDBDaoImpl implements ClientDao {
                 client = new Client(newID, name , surname, phone, email);
             }
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,8 +93,8 @@ public class ClientDBDaoImpl implements ClientDao {
                     phone = resultSet.getString("PHONE");
                     clients.add(new Client(clientID, name, surname, phone, email));
                 }
-                statement.close();
-                connection.close();
+//                statement.close();
+//                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,10 +122,10 @@ public class ClientDBDaoImpl implements ClientDao {
 
                 newClient = new Client(clientID, name, surname, phone, email);
 
-                resultSet.close();
+//                resultSet.close();
             }
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

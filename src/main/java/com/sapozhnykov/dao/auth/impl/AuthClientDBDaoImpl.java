@@ -24,8 +24,8 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
         {
             statement.executeUpdate();
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,10 +52,10 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
                 }
 
 
-                resultSet.close();
+//                resultSet.close();
             }
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,8 +121,8 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
                     password = resultSet.getString("PASSWORD");
                     authClients.add(new AuthClient(authID, userID, phone, password));
                 }
-                statement.close();
-                connection.close();
+//                statement.close();
+//                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -144,10 +144,10 @@ public class AuthClientDBDaoImpl implements AuthClientDao {
                 if(resultSet.next()) {
                     result = true;
                 }
-                resultSet.close();
+//                resultSet.close();
             }
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

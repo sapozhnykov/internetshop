@@ -24,8 +24,8 @@ public class OrderDBDaoImpl implements OrderDao {
         {
             statement.executeUpdate();
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,17 +47,17 @@ public class OrderDBDaoImpl implements OrderDao {
                             statementTwo.setLong(2, product.getId());
                             statementTwo.executeUpdate();
                         }
-                        statementTwo.close();
+//                        statementTwo.close();
                     }
                 }
-                resultSet.close();
+//                resultSet.close();
             }
             if(rows > 0) {
                 return true;
             }
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,7 +83,7 @@ public class OrderDBDaoImpl implements OrderDao {
                         }
                     }
                 }
-                resultSet.close();
+//                resultSet.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

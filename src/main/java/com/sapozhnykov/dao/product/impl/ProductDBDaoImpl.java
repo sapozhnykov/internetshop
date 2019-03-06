@@ -21,8 +21,8 @@ public class ProductDBDaoImpl implements ProductDao {
         {
             statement.executeUpdate();
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -37,8 +37,8 @@ public class ProductDBDaoImpl implements ProductDao {
             statement.setDouble(2, price);
             int rows = statement.executeUpdate();
 
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
 
             if(rows > 0) {
                 return true;
@@ -82,8 +82,8 @@ public class ProductDBDaoImpl implements ProductDao {
                     price = resultSet.getDouble("PRICE");
                     products.add(new Product(productID, name, price));
                 }
-                statement.close();
-                connection.close();
+//                statement.close();
+//                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -109,10 +109,10 @@ public class ProductDBDaoImpl implements ProductDao {
 
                 newProduct = new Product(productID, name, price);
 
-                resultSet.close();
+//                resultSet.close();
             }
-            statement.close();
-            connection.close();
+//            statement.close();
+//            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
